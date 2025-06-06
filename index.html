@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LT AI - Intelligent Chat Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Global Watermark Background -->
+    <div class="global-watermark"></div>
+
+    <!-- Star Canvas Background -->
+    <canvas id="stars" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;"></canvas>
+
+    <!-- Floating Icon "Stars" -->
+    <div id="icon-stars"></div>
+
+    <!-- Navbar Placeholder -->
+    <div class="navbar-placeholder"></div>
+
+    <!-- Mobile Navbar Placeholder -->
+    <div class="mobile-navbar-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero animate-on-scroll">
+           <!-- Moved navigation links to very top -->
+    
+        <div class="logo" style="flex-direction:column;gap:0.5rem;">
+            <div class="logo-icon mobile-only">
+                <img src="lt-ai.png"  style="filter: brightness(20); width:80px;height:80px; margin-bottom: 22px;">
+            </div>
+            
+            <h1 class="logo-text">LT </h1>
+        </div>
+        
+       <h2 class="tagline">
+    Your <span class="highlight">complete curriculum-aligned</span> learning platform for <span class="highlight">smarter study</span> and <span class="highlight">exam success</span>.<br>
+    <span style="font-size:1.1rem;color:var(--text-secondary);display:block;margin-top:1rem;">
+        Access essential books, master exams with targeted quizzes, and get instant AI help – all unified in one powerful place!
+    </span>
+</h2>
+
+<a href="apps.html" class="cta-button">
+    Explore apps<i class="fas fa-arrow-right"></i>
+</a>
+</section>
+
+<div class="row">
+    <section class="feature-section animate-on-scroll" style="position:relative;">
+        <div class="feature-icon">
+            <i class="fas fa-book-open"></i> </div>
+        <h3 class="feature-title">Official Digital Library</h3>
+        <p class="feature-desc">
+            Instantly access a comprehensive library of official textbooks and supplementary learning materials, directly aligned with your local curriculum. Your entire course material is now digitally at your fingertips.
+        </p>
+    </section>
+
+    <section class="feature-section animate-on-scroll">
+        <div class="feature-icon">
+            <i class="fas fa-question-circle"></i> </div>
+        <h3 class="feature-title">Targeted Exam Quizzes</h3>
+        <p class="feature-desc">
+            Boost your exam confidence with thousands of practice questions directly aligned with ministry exam standards. Get instant feedback and track your progress for every subject.
+        </p>
+    </section>
+</div>
+
+<div class="row">
+    <section class="feature-section animate-on-scroll">
+        <div class="feature-icon">
+            <i class="fas fa-robot"></i> </div>
+        <h3 class="feature-title">Intelligent AI Assistant</h3>
+        <p class="feature-desc">
+            Unblock learning hurdles with personalized help from your LT AI. Get instant, clear explanations, step-by-step solutions, and answers tailored precisely to your academic needs.
+        </p>
+    </section>
+
+    <section class="feature-section animate-on-scroll">
+        <div class="feature-icon">
+            <i class="fas fa-layer-group"></i> </div>
+        <h3 class="feature-title">Unified & Intuitive Learning</h3>
+        <p class="feature-desc">
+            Experience a seamless and powerful learning journey. LT Prep integrates all your study tools—books, quizzes, and AI—into one clean, responsive platform designed for focus and effective preparation.
+        </p>
+    </section>
+</div>
+
+    <!-- Footer -->
+    <footer>
+    
+
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+        </div>
+        
+        <p class="copyright">© 2025 LT AI. All rights reserved.</p>
+        
+    </footer>
+<br><br><br>
+    
+   <script src="star.js"></script>
+       <script src="navbar.js"></script>
+      <script src="main.js"></script>
+</body>
+</html>

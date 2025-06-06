@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LT AI - User Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Global Watermark Background -->
+    <div class="global-watermark"></div>
+
+    <!-- Star Canvas Background -->
+    <canvas id="stars" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;"></canvas>
+
+    <!-- Floating Icon "Stars" -->
+    <div id="icon-stars"></div>
+
+    <!-- Navbar Placeholder -->
+    <div class="navbar-placeholder"></div>
+
+    <!-- Mobile Navbar Placeholder -->
+    <div class="mobile-navbar-placeholder"></div>
+
+    <!-- Profile Section -->
+    <section class="profile animate-on-scroll" style="max-width: 600px; margin: 120px auto 0; padding: 2rem; text-align: center;">
+        <h1 class="logo-text" style="
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        ">
+           
+        </h1>
+        <div class="profile-avatar" style="width: 120px; height: 120px; border-radius: 50%; background: #232326; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 20px;">
+            <i class="fas fa-user"></i>
+        </div>
+        <h2 style="color: var(--text-primary); margin-bottom: 0.5rem;">John Doe</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">john.doe@example.com</p>
+        <p style="color: var(--text-secondary);">
+            Welcome to your profile page! You can update your information and settings here.
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+        </div>
+        
+        <p class="copyright">© 2025 LT AI. All rights reserved.</p>
+    </footer>
+<br><br><br>
+    
+    <script src="main.js"></script>
+    <script src="star.js"></script>
+    <script src="navbar.js"></script>
+</body>
+</html>

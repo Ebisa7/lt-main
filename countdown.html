@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown Feature Card</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!-- ...existing code... -->
+
+    <section class="feature-section" style="margin-top: 60px; position: relative;">
+        <span class="card-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+        <div class="feature-icon">
+            <i class="fa-regular fa-clock"></i>
+        </div>
+        <div class="feature-title">Countdown to 2026</div>
+        <div class="feature-desc" style="margin-bottom: 1.5rem;">
+            Time left until <span class="highlight">2026</span>!
+        </div>
+        <div id="countdown-timer">
+            <div class="countdown-segment">
+                <div class="countdown-value" id="cd-days">00</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-segment">
+                <div class="countdown-value" id="cd-hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-segment">
+                <div class="countdown-value" id="cd-minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-segment">
+                <div class="countdown-value" id="cd-seconds">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Countdown target date (YYYY-MM-DDTHH:MM:SS)
+    const targetDate = new Date('2026-01-01T00:00:00');
+
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+            document.getElementById('countdown-timer').innerHTML = '<span style="font-size:1.3rem;color:#fff;font-weight:600;">Happy 2026!</span>';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+        document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>

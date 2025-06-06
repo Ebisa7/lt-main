@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iOS In-App Confirmation Alert</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #18181a;
+            --alert-bg: #232326;
+            --text-main: #fff;
+            --text-secondary: #b0b0b5;
+            --divider: #33343a;
+            --btn: #0a84ff;
+            --btn-destructive: #ff453a;
+            --btn-bg-active: #232326;
+        }
+        body {
+            background: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ios-alert-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .ios-alert {
+            background: var(--alert-bg);
+            border-radius: 14px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            min-width: 200px;
+            max-width: 90vw;
+            padding: 24px 20px 0 20px;
+            text-align: center;
+            animation: popin 0.25s cubic-bezier(.36,1.66,.64,1) both;
+        }
+        @keyframes popin {
+            0% { transform: scale(1.15); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .ios-alert-title {
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+        .ios-alert-message {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+        .ios-alert-actions {
+            display: flex;
+            border-top: 1px solid var(--divider);
+            margin: 0 -20px;
+            height: 44px;
+        }
+        .ios-alert-btn {
+            flex: 1;
+            border: none;
+            background: none;
+            font-size: 17px;
+            color: var(--btn);
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            transition: background 0.2s;
+            border-radius: 0 0 0 0;
+            height: 100%;
+        }
+        .ios-alert-btn:not(:last-child) {
+            border-right: 1px solid var(--divider);
+        }
+        .ios-alert-btn.destructive {
+            color: var(--btn-destructive);
+        }
+        .ios-alert-btn:active {
+            background: var(--btn-bg-active);
+        }
+        button[onclick] {
+            margin:auto;
+            display:block;
+            padding:12px 24px;
+            font-size:16px;
+            border-radius:8px;
+            border:none;
+            background: var(--btn);
+            color: #fff;
+            transition: background 0.2s;
+        }
+        button[onclick]:active {
+            background: #005ecb;
+        }
+    </style>
+</head>
+<body>
+    <div class="ios-alert-backdrop" id="iosAlertBackdrop" style="display:none;">
+        <div class="ios-alert" role="alertdialog" aria-modal="true">
+            <div class="ios-alert-title" id="alertTitle">Are you sure?</div>
+            <div class="ios-alert-message" id="alertMessage">Do you want to proceed with this action?</div>
+            <div class="ios-alert-actions">
+                <button style=" border-radius: 0 0 0 14px;" class="ios-alert-btn" id="alertCancel">Cancel</button>
+                <button style=" border-radius: 0 0 14px 0;" class="ios-alert-btn destructive" id="alertConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+    <button onclick="showAlert()">Show iOS Alert</button>
+    <script>
+        function showAlert() {
+            document.getElementById('iosAlertBackdrop').style.display = 'flex';
+        }
+        document.getElementById('alertCancel').onclick = function() {
+            document.getElementById('iosAlertBackdrop').style.display = 'none';
+            alert('Cancelled!');
+        };
+        document.getElementById('alertConfirm').onclick = function() {
+            document.getElementById('iosAlertBackdrop').style.display = 'none';
+            alert('Confirmed!');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LT AI - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #111;
+            --bg-secondary: #18181b;
+            --navbar-bg: rgba(24,24,27,0.96);
+            --accent-color: #fff;
+            --accent-hover: #e5e5e5;
+            --text-primary: #fff;
+            --text-secondary: #a1a1aa;
+            --highlight: #27272a;
+            --border-color: #27272a;
+            --shadow-bx: 0 2px 24px 0 rgba(0,0,0,0.18);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .global-watermark {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1; opacity: 0.18;
+            background:
+                radial-gradient(circle at 30% 40%, rgba(255,255,255,0.04) 0%, transparent 60%),
+                radial-gradient(circle at 70% 70%, rgba(255,255,255,0.03) 0%, transparent 60%);
+            background-size: 200% 200%;
+            animation: gradientFlow 30s ease infinite;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 50% 100%; }
+            75% { background-position: 0% 50%; }
+            100% { background-position: 0% 0%; }
+        }
+        .login-container {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh; padding: 2rem; position: relative; z-index: 1;
+        }
+        .login-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 3rem 2.5rem;
+            width: 100%; max-width: 450px;
+            box-shadow: var(--shadow-bx);
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .login-header { text-align: center; margin-bottom: 2.5rem; }
+        .login-logo {
+            display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;
+        }
+        .login-logo-icon {
+            width: 50px; height: 50px; background: transparent; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .login-logo-icon img {
+            width: 100%; height: 100%; object-fit: contain; filter: brightness(20);
+        }
+        .login-title {
+            font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;
+            background: linear-gradient(24deg, rgba(255, 255, 255, 1) 50%, rgb(0, 0, 0) 100%);
+            background-clip: text; color: transparent;
+        }
+        .login-subtitle { color: var(--text-secondary); font-size: 1rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label {
+            display: block; margin-bottom: 0.5rem; color: var(--text-primary); font-weight: 500;
+        }
+        .form-input {
+            width: 100%; padding: 1rem; background: var(--highlight);
+            border: 1px solid var(--border-color); border-radius: 20px;
+            color: var(--text-primary); font-size: 1rem; transition: all 0.2s;
+        }
+        .form-input:focus {
+            outline: none; border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+        }
+        .password-wrapper { position: relative; }
+        .toggle-password {
+            position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+            color: var(--text-secondary); cursor: pointer; transition: color 0.2s;
+        }
+        .toggle-password:hover { color: var(--text-primary); }
+        .remember-forgot {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
+        }
+        .remember-me {
+            display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);
+        }
+        .remember-me input { accent-color: var(--accent-color); }
+        .forgot-password {
+            color: var(--text-secondary); font-size: 0.9rem; text-decoration: none; transition: color 0.2s;
+        }
+        .forgot-password:hover { color: var(--accent-color); }
+        .login-button {
+            width: 100%; padding: 1rem; background: var(--accent-color); color: var(--bg-primary);
+            border: none; border-radius: 30px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s; margin-bottom: 1.5rem;
+        }
+        .login-button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .divider {
+            display: flex; align-items: center; margin: 1.5rem 0;
+            color: var(--text-secondary); font-size: 0.9rem;
+        }
+        .divider::before, .divider::after {
+            content: ""; flex: 1; height: 1px; background: var(--border-color); margin: 0 1rem;
+        }
+        .social-login {
+            display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;
+        }
+        .social-button {
+            width: 50px; height: 50px; border-radius: 15px; background: var(--highlight);
+            border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;
+            color: var(--text-primary); font-size: 1.2rem; transition: all 0.2s;
+        }
+        .social-button:hover { background: var(--bg-primary); transform: translateY(-2px); }
+        .signup-link {
+            text-align: center; color: var(--text-secondary); font-size: 0.9rem;
+        }
+        .signup-link a {
+            color: var(--accent-color); text-decoration: none; font-weight: 500; transition: color 0.2s;
+        }
+        .signup-link a:hover { color: var(--accent-hover); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        canvas#stars {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none;
+        }
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-card { padding: 2rem 1.5rem; }
+            .login-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="global-watermark"></div>
+    <canvas id="stars"></canvas>
+    <div id="icon-stars"></div>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">
+                    <div class="login-logo-icon">
+                        <img src="lt-ai.png" alt="LT AI">
+                    </div>
+                </div>
+                <h1 class="login-title" id="login-title">Welcome back</h1>
+                <p class="login-subtitle" id="login-subtitle">Sign in to continue to LT AI</p>
+            </div>
+            <!-- Login/Signup/Reset Password Pages -->
+            <div id="page-login">
+                <form>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            class="form-input"
+                            placeholder="Enter your email"
+                            autocomplete="username"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="password"
+                                class="form-input"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            />
+                            <i class="fas fa-eye toggle-password" style="cursor:pointer;" tabindex="0"></i>
+                        </div>
+                    </div>
+                    <div class="remember-forgot" id="login-forgot-row">
+                        <div></div>
+                        <a href="#" class="forgot-password" id="forgot-password-link">Forgot password?</a>
+                    </div>
+                    <div id="login-message" style="background:#1d2b1d; color:#b4ffb4; border:1px solid #b4ffb4; border-radius:12px; padding:10px 15px; margin-bottom:18px; font-size:0.97rem; display:none;"></div>
+                    <div id="login-error" style="background:#2e1517; color:#ffb4b4; border:1px solid #ffb4b4; border-radius:12px; padding:10px 15px; margin-bottom:18px; font-size:0.97rem; display:none;"></div>
+                    <button type="submit" class="login-button">
+                        Sign In
+                    </button>
+                    <div class="divider">or continue with</div>
+                    <div class="social-login">
+                        <button type="button" class="social-button" title="Continue with Google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="social-button" disabled title="Apple login not available">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                        <button type="button" class="social-button" disabled title="GitHub login not available">
+                            <i class="fab fa-github"></i>
+                        </button>
+                    </div>
+                    <p class="signup-link">
+                        Don't have an account? <a href="#" id="show-signup">Sign up</a>
+                    </p>
+                </form>
+            </div>
+            <div id="page-signup" style="display:none;">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input
+                                type="text"
+                                id="firstName"
+                                class="form-input"
+                                placeholder="Enter your first name"
+                                autocomplete="given-name"
+                                required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                class="form-input"
+                                placeholder="Enter your last name"
+                                autocomplete="family-name"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-signup" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            id="email-signup"
+                            class="form-input"
+                            placeholder="Enter your email"
+                            autocomplete="username"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="password-signup" class="form-label">Password</label>
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="password-signup"
+                                class="form-input"
+                                placeholder="Enter your password"
+                                autocomplete="new-password"
+                                required
+                            />
+                            <i class="fas fa-eye toggle-password" data-target="password-signup" style="cursor:pointer;" tabindex="0"></i>
+                        </div>
+                        <div class="password-strength-bar">
+                            <div class="password-strength-fill" id="password-strength-fill"></div>
+                        </div>
+                        <div class="password-strength-label" id="password-strength-label"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-signup-repeat" class="form-label">Re-enter Password</label>
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="password-signup-repeat"
+                                class="form-input"
+                                placeholder="Re-enter your password"
+                                autocomplete="new-password"
+                                required
+                            />
+                            <i class="fas fa-eye toggle-password" data-target="password-signup-repeat" style="cursor:pointer;" tabindex="0"></i>
+                        </div>
+                    </div>
+                    <div id="signup-message" style="background:#1d2b1d; color:#b4ffb4; border:1px solid #b4ffb4; border-radius:12px; padding:10px 15px; margin-bottom:18px; font-size:0.97rem; display:none;"></div>
+                    <div id="signup-error" style="background:#2e1517; color:#ffb4b4; border:1px solid #ffb4b4; border-radius:12px; padding:10px 15px; margin-bottom:18px; font-size:0.97rem; display:none;"></div>
+                    <button type="submit" class="login-button" id="signup-submit-btn" disabled>
+                        Sign Up
+                    </button>
+                    <div class="divider">or continue with</div>
+                    <div class="social-login">
+                        <button type="button" class="social-button" title="Continue with Google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="social-button" disabled title="Apple login not available">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                        <button type="button" class="social-button" disabled title="GitHub login not available">
+                            <i class="fab fa-github"></i>
+                        </button>
+                    </div>
+                    <p class="signup-link">
+                        Already have an account? <a href="#" id="show-signin">Sign in</a>
+                    </p>
+                </form>
+            </div>
+            <div id="page-reset" style="display:none;">
+                <form>
+                    <div class="form-group">
+                        <label for="reset-email" class="form-label">Email</label>
+                        <input
+                            type="email"
+                            id="reset-email"
+                            class="form-input"
+                            placeholder="Enter your email"
+                            autocomplete="username"
+                            required
+                        />
+                    </div>
+                    <button type="submit" class="login-button">Send reset link</button>
+                    <div id="reset-message" style="margin-top:1.2rem; color:#b4ffb4; display:none;"></div>
+                    <div id="reset-error" style="margin-top:1.2rem; color:#ffb4b4; display:none;"></div>
+                    <p class="signup-link">
+                        <a href="#" id="back-to-login">Back to login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.8/dist/umd/supabase.min.js"></script>
+    <script>
+        // --- Star Canvas Animation ---
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        let stars = [];
+        function createStar() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1.2 + 0.3,
+                color: `rgba(255,255,255,${Math.random() * 0.5 + 0.3})`,
+                speedX: (Math.random() - 0.5) * 0.08,
+                speedY: (Math.random() - 0.5) * 0.08,
+                opacity: Math.random() * 0.7 + 0.3
+            };
+        }
+        const numStars = 160;
+        function populateStars() {
+            stars = [];
+            for (let i = 0; i < numStars; i++) {
+                stars.push(createStar());
+            }
+        }
+        populateStars();
+        function drawStar(star) {
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.fillStyle = star.color;
+            ctx.globalAlpha = star.opacity;
+            ctx.fill();
+            ctx.closePath();
+        }
+        function updateStar(star) {
+            star.x += star.speedX;
+            star.y += star.speedY;
+            if (star.x > canvas.width) star.x = 0;
+            if (star.x < 0) star.x = canvas.width;
+            if (star.y > canvas.height) star.y = 0;
+            if (star.y < 0) star.y = canvas.height;
+        }
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < stars.length; i++) {
+                drawStar(stars[i]);
+                updateStar(stars[i]);
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            populateStars();
+        });
+
+        // --- Floating FontAwesome Icon "Stars" ---
+        const iconList = [
+             'fa-chart-line', 'fa-globe', 'fa-microchip', 'fa-database', 'fa-key',
+            'fa-network-wired', 'fa-atom', 'fa-robot', 'fa-microscope',
+            'fa-brain', 'fa-lightbulb', 'fa-comments', 'fa-cogs', 'fa-shield-alt', 'fa-comment-dots',
+        ];
+        const iconCount = 18;
+        function generateIconPositions(n, min=8, max=92, minDist=12) {
+            const points = [];
+            let attempts = 0;
+            while (points.length < n && attempts < n * 100) {
+                const x = min + Math.random() * (max - min);
+                const y = min + Math.random() * (max - min);
+                let ok = true;
+                for (const p of points) {
+                    const dx = x - p.x;
+                    const dy = y - p.y;
+                    if (Math.sqrt(dx*dx + dy*dy) < minDist) {
+                        ok = false;
+                        break;
+                    }
+                }
+                if (ok) points.push({x, y});
+                attempts++;
+            }
+            while (points.length < n) {
+                points.push({
+                    x: min + Math.random() * (max - min),
+                    y: min + Math.random() * (max - min)
+                });
+            }
+            return points;
+        }
+        function createIconStars() {
+            const iconStarsDiv = document.getElementById('icon-stars');
+            iconStarsDiv.innerHTML = '';
+            iconStarsDiv.style.position = 'fixed';
+            iconStarsDiv.style.top = '0';
+            iconStarsDiv.style.left = '0';
+            iconStarsDiv.style.width = '100vw';
+            iconStarsDiv.style.height = '100vh';
+            iconStarsDiv.style.pointerEvents = 'none';
+            iconStarsDiv.style.zIndex = '-1';
+            const positions = generateIconPositions(iconCount, 8, 92, 12);
+            const styleSheet = document.createElement('style');
+            document.head.appendChild(styleSheet);
+            for (let i = 0; i < iconCount; i++) {
+                const icon = document.createElement('i');
+                icon.className = `fas ${iconList[i % iconList.length]}`;
+                icon.style.position = 'absolute';
+                icon.style.top = `${positions[i].y}%`;
+                icon.style.left = `${positions[i].x}%`;
+                icon.style.fontSize = `${(Math.random() * 1.1 + 0.7).toFixed(2)}rem`;
+                icon.style.color = 'rgba(255,255,255,0.23)';
+                icon.style.opacity = (Math.random() * 0.4 + 0.5).toFixed(2);
+                icon.style.filter = 'drop-shadow(0 0 6px rgba(255,255,255,0.18))';
+                icon.style.pointerEvents = 'none';
+                const animName = `iconFloat${i}`;
+                const duration = (16 + Math.random() * 8).toFixed(2);
+                const delay = (Math.random() * 8).toFixed(2);
+                icon.style.animation = `${animName} ${duration}s ease-in-out ${delay}s infinite alternate`;
+                function randOffset() {
+                    return (Math.random() * 16 - 8).toFixed(1);
+                }
+                const kf = `
+                    @keyframes ${animName} {
+                        0%   { transform: translate(0px, 0px) scale(1);}
+                        30%  { transform: translate(${randOffset()}px, ${randOffset()}px) scale(1.05);}
+                        60%  { transform: translate(${randOffset()}px, ${randOffset()}px) scale(0.97);}
+                        100% { transform: translate(0px, 0px) scale(1);}
+                    }
+                `;
+                styleSheet.sheet.insertRule(kf, styleSheet.sheet.cssRules.length);
+                iconStarsDiv.appendChild(icon);
+            }
+        }
+        createIconStars();
+        window.addEventListener('resize', createIconStars);
+
+        // --- Supabase Auth Logic (Plain JS) ---
+        const SUPABASE_URL = 'https://zdbtvxqhqpqiplcjzygd.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpkYnR2eHFocXBxaXBsY2p6eWdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc2OTMyMjQsImV4cCI6MjA2MzI2OTIyNH0.hhF1VEeRN_JRU8MfGkpI_8ratJTdQp7p2KaMgjvJJVs';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Page switching logic
+        function showPage(page) {
+            document.getElementById('page-login').style.display = page === 'login' ? '' : 'none';
+            document.getElementById('page-signup').style.display = page === 'signup' ? '' : 'none';
+            document.getElementById('page-reset').style.display = page === 'reset' ? '' : 'none';
+            // Update header
+            if (page === 'login') {
+                document.getElementById('login-title').textContent = 'Welcome back';
+                document.getElementById('login-subtitle').textContent = 'Sign in to continue to LT AI';
+            } else if (page === 'signup') {
+                document.getElementById('login-title').textContent = 'Create your account';
+                document.getElementById('login-subtitle').textContent = 'Sign up to get started with LT AI';
+            } else if (page === 'reset') {
+                document.getElementById('login-title').textContent = 'Reset your password';
+                document.getElementById('login-subtitle').textContent = 'Enter your email to reset your password';
+            }
+            // Clear messages on page switch
+            clearAllMessages();
+        }
+
+        // Toggle login/signup/reset page
+        document.getElementById('show-signup').onclick = function(e) {
+            e.preventDefault();
+            showPage('signup');
+        };
+        document.getElementById('show-signin').onclick = function(e) {
+            e.preventDefault();
+            showPage('login');
+        };
+        document.getElementById('forgot-password-link').onclick = function(e) {
+            e.preventDefault();
+            showPage('reset');
+        };
+        document.getElementById('back-to-login').onclick = function(e) {
+            e.preventDefault();
+            showPage('login');
+        };
+
+        // Password show/hide for both forms
+        document.querySelectorAll('.toggle-password').forEach(function(icon) {
+            icon.onclick = function() {
+                let targetId = this.dataset.target || this.previousElementSibling.id;
+                let pwd = document.getElementById(targetId);
+                if (pwd.type === 'password') {
+                    pwd.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    pwd.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            };
+        });
+
+        // --- Message helpers ---
+        function clearAllMessages() {
+            // Login
+            let m = document.getElementById('login-message');
+            let e = document.getElementById('login-error');
+            if (m) m.style.display = 'none';
+            if (e) e.style.display = 'none';
+            // Signup
+            m = document.getElementById('signup-message');
+            e = document.getElementById('signup-error');
+            if (m) m.style.display = 'none';
+            if (e) e.style.display = 'none';
+            // Reset
+            m = document.getElementById('reset-message');
+            e = document.getElementById('reset-error');
+            if (m) m.style.display = 'none';
+            if (e) e.style.display = 'none';
+        }
+        function showLoginMessage(msg) {
+            let m = document.getElementById('login-message');
+            m.textContent = msg;
+            m.style.display = '';
+        }
+        function showLoginError(msg) {
+            let e = document.getElementById('login-error');
+            e.textContent = msg;
+            e.style.display = '';
+        }
+        function showSignupMessage(msg) {
+            let m = document.getElementById('signup-message');
+            m.textContent = msg;
+            m.style.display = '';
+        }
+        function showSignupError(msg) {
+            let e = document.getElementById('signup-error');
+            e.textContent = msg;
+            e.style.display = '';
+        }
+
+        // --- Login form logic ---
+        document.querySelector('#page-login form').onsubmit = async function(e) {
+            e.preventDefault();
+            clearAllMessages();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            if (!email || !password) {
+                showLoginError('Please enter your email and password.');
+                return;
+            }
+            try {
+                const { error, data } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                showLoginMessage('Login successful! Redirecting...');
+                setTimeout(() => window.location.reload(), 1200);
+            } catch (err) {
+                showLoginError('Login Failed: ' + err.message);
+            }
+        };
+
+        // --- Signup form logic ---
+        document.querySelector('#page-signup form').onsubmit = async function(e) {
+            e.preventDefault();
+            clearAllMessages();
+            const email = document.getElementById('email-signup').value.trim();
+            const password = document.getElementById('password-signup').value;
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            if (!firstName || !lastName) {
+                showSignupError('Please enter your first and last name.');
+                return;
+            }
+            try {
+                const { error, data } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: { first_name: firstName, last_name: lastName }
+                    }
+                });
+                if (error) throw error;
+                showSignupMessage('Sign up successful! Please check your email to confirm your account.');
+            } catch (err) {
+                showSignupError('Sign Up Failed: ' + err.message);
+            }
+        };
+
+        // --- Reset password form logic ---
+        document.querySelector('#page-reset form').onsubmit = async function(e) {
+            e.preventDefault();
+            clearAllMessages();
+            const email = document.getElementById('reset-email').value.trim();
+            const msgDiv = document.getElementById('reset-message');
+            const errDiv = document.getElementById('reset-error');
+            msgDiv.style.display = 'none';
+            errDiv.style.display = 'none';
+            if (!email) {
+                errDiv.textContent = 'Please enter your email.';
+                errDiv.style.display = '';
+                return;
+            }
+            try {
+                const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin });
+                if (error) throw error;
+                msgDiv.textContent = 'If your email is registered, a password reset link has been sent. Please check your inbox.';
+                msgDiv.style.display = '';
+            } catch (err) {
+                errDiv.textContent = 'Failed to send reset email: ' + err.message;
+                errDiv.style.display = '';
+            }
+        };
+
+        // On load, check session and show welcome if logged in
+        (async function() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session && session.user) {
+                // Hide all pages, show welcome
+                document.getElementById('page-login').style.display = 'none';
+                document.getElementById('page-signup').style.display = 'none';
+                document.getElementById('page-reset').style.display = 'none';
+                document.getElementById('login-title').textContent = 'Welcome!';
+                document.getElementById('login-subtitle').textContent = 'You are signed in to LT AI';
+                const welcome = document.createElement('div');
+                welcome.style.textAlign = 'center';
+                welcome.innerHTML = `
+                    <p style="font-size:1.1rem; color:#fff; margin-bottom:0.5rem;">
+                        Hello, ${session.user.user_metadata?.first_name || session.user.email || session.user.user_metadata?.full_name || 'Guest'}!
+                    </p>
+                    <p style="font-size:0.95rem; color:#a1a1aa; margin-bottom:1.5rem;">
+                        Your User ID: <span style="font-family:monospace; word-break:break-all;">${session.user.id}</span>
+                    </p>
+                    <button id="signout-btn" class="login-button" style="background:#ef4444; color:#fff; margin-bottom:0;">
+                        Sign Out
+                    </button>
+                `;
+                document.querySelector('.login-card').appendChild(welcome);
+                document.getElementById('signout-btn').onclick = async function() {
+                    await supabase.auth.signOut();
+                    window.location.reload();
+                };
+            }
+        })();
+
+        // --- Social login (Google only) ---
+        document.querySelectorAll('.social-button[title="Continue with Google"]').forEach(function(btn){
+            btn.onclick = async function() {
+                clearAllMessages();
+                try {
+                    const { error } = await supabase.auth.signInWithOAuth({
+                        provider: 'google',
+                        options: { redirectTo: window.location.origin }
+                    });
+                    if (error) throw error;
+                } catch (err) {
+                    showLoginError('Google Sign In Failed: ' + err.message);
+                }
+            };
+        });
+    </script>
+</body>
+</html>
+
+

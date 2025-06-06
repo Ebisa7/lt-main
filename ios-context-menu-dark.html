@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ...existing code... -->
+    <title>Context Menu: iOS Dark Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #18181b;
+            color: #f4f4f5;
+            overscroll-behavior: none;
+        }
+        .context-menu-wrapper {
+            position: fixed;
+            z-index: 1000;
+            display: none;
+            min-width: 200px;
+            border-radius: 14px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+            overflow: hidden;
+        }
+        .ios-style {
+            background: rgba(28, 28, 30, 0.85);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 0.5px solid rgba(255,255,255,0.08);
+            font-size: 17px;
+        }
+        .ios-style ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .ios-style li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            cursor: pointer;
+            color: #0a84ff;
+            text-align: left;
+            border-bottom: 0.5px solid rgba(255,255,255,0.10);
+            background: transparent;
+            transition: background 0.1s;
+        }
+        .ios-style li:last-child {
+            border-bottom: none;
+        }
+        .ios-style li:active {
+            background: rgba(255,255,255,0.08);
+        }
+        .ios-style li.destructive {
+            color: #ff453a;
+        }
+        .ios-style li .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.85;
+        }
+        #messageBox {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(28,28,30,0.92);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+            pointer-events: none;
+        }
+        #messageBox.show {
+            opacity: 1;
+            bottom: 30px;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-6 selection:bg-blue-500 selection:text-white">
+    <!-- ...existing code... -->
+    <div class="text-center mb-12">
+        <h1 class="text-3xl font-bold text-gray-100 mb-2">Context Menu Demo (iOS Dark Style)</h1>
+        <p class="text-gray-400">Right-click (or long-press on touch devices) on the area below.</p>
+    </div>
+    <div class="w-full max-w-2xl">
+        <div id="iosTriggerArea" class="bg-zinc-900 p-8 rounded-xl shadow-lg h-64 flex items-center justify-center text-center text-gray-200 cursor-pointer select-none border border-zinc-800">
+            <p class="text-lg">Tap & Hold or Right-Click Here (iOS Dark Style)</p>
+        </div>
+    </div>
+    <!-- iOS Context Menu -->
+    <div id="iosContextMenu" class="context-menu-wrapper ios-style">
+        <ul>
+            <li data-action="ios-share">
+                <span class="icon">
+                    <!-- Share icon (Heroicons) -->
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 8a3 3 0 11-6 0 3 3 0 016 0zM19.5 21a2.5 2.5 0 00-5 0M9.5 21a2.5 2.5 0 00-5 0M12 3v5m0 0l3-3m-3 3L9 5"></path></svg>
+                </span>
+                Share
+            </li>
+            <li data-action="ios-copy">
+                <span class="icon">
+                    <!-- Copy icon -->
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" /><path d="M5 15V5a2 2 0 012-2h10" /></svg>
+                </span>
+                Copy
+            </li>
+            <li data-action="ios-edit">
+                <span class="icon">
+                    <!-- Edit icon -->
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a2 2 0 01-2.828 0L9 13z" /></svg>
+                </span>
+                Edit
+            </li>
+            <li data-action="ios-delete" class="destructive">
+                <span class="icon">
+                    <!-- Trash icon -->
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M8 7V4a2 2 0 012-2h4a2 2 0 012 2v3" /></svg>
+                </span>
+                Delete
+            </li>
+            <li data-action="ios-cancel">
+                <span class="icon">
+                    <!-- X icon -->
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </span>
+                Cancel
+            </li>
+        </ul>
+    </div>
+    <div id="messageBox">Action Message</div>
+    <script>
+        // ...existing JS code unchanged...
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LT AI - Intelligent Chat Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Global Watermark Background -->
+    <div class="global-watermark"></div>
+
+    <!-- Star Canvas Background -->
+    <canvas id="stars" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;"></canvas>
+
+    <!-- Floating Icon "Stars" -->
+    <div id="icon-stars"></div>
+
+        <div class="navbar-placeholder"></div>
+
+    <!-- Mobile Navbar Placeholder -->
+    <div class="mobile-navbar-placeholder"></div>
+   
+   <h1 class="logo-text" style="
+        margin-top: 120px;
+        margin-bottom: 80px;
+        text-align: center;
+        background: linear-gradient(to right, #fff, #a1a1aa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    ">
+        LT Apps
+    </h1>
+
+    <!-- Feature Cards: Group into rows for desktop -->
+    <div class="row">
+      <section class="apps-section card-quiz animate-on-scroll" style="position:relative;">
+        <i class="fas fa-arrow-right card-arrow"></i>
+        <div class="apps-icon">
+          <img src="lt-ai.png" style=" filter: brightness(100); width:3rem; height:3rem; object-fit:contain;">
+        </div>
+        <h3 class="apps-title">LT Quiz</h3>
+        <p class="apps-desc">
+            Experience dynamic, clickable quiz cards with instant feedback. Select an answer to see clear explanations for every choice—perfect for active recall and self-assessment.
+        </p>
+      </section>
+
+      <section class="apps-section card-ai animate-on-scroll">
+       <i class="fas fa-arrow-right card-arrow"></i>
+        <div class="apps-icon">
+          <img src="lt-ai.png" style=" filter: brightness(100); width:3rem; height:3rem; object-fit:contain;">
+        </div>
+        <h3 class="apps-title">LT AI</h3>
+        <p class="apps-desc">
+            Not sure why an answer is correct? Each quiz card includes an "Ask LT AI" chat—get step-by-step explanations, clarifications, and math help directly from our built-in tutor.
+        </p>
+      </section>
+    </div>
+
+    <div class="row">
+        <section class="apps-section card-prep animate-on-scroll">
+      <i class="fas fa-arrow-right card-arrow"></i>
+            <div class="apps-icon">
+          <img src="lt-ai.png" style=" filter: brightness(100); width:3rem; height:3rem; object-fit:contain;">
+        </div>
+        <h3 class="apps-title">LT Prep</h3>
+        <p class="apps-desc">
+           Your ultimate unified study companion. LT Prep brings together all LT apps—books, quizzes, and AI assistance—for comprehensive exam preparation.    </p>
+      </section>
+
+      <section class="apps-section card-store animate-on-scroll">
+        <i class="fas fa-arrow-right card-arrow"></i>
+        <div class="apps-icon">
+          <img src="lt-ai.png" style=" filter: brightness(100); width:3rem; height:3rem; object-fit:contain;">
+        </div>
+        <h3 class="apps-title">LT Store</h3>
+        <p class="apps-desc">
+        Access essential educational textbooks and learning materials directly from the Oromia Education Bureau (OEB) curriculum.
+        </p>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+    
+
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+        </div>
+        
+        <p class="copyright">© 2025 LT AI. All rights reserved.</p>
+        
+    </footer>
+<br><br><br>
+  
+       <script src="star.js"></script>
+       <script src="navbar.js"></script>
+      <script src="main.js"></script>
+</body>
+</html>
