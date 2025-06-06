@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    let currentPage = window.location.pathname.split('/').pop();
-    if (!currentPage) {
+    let currentPage = window.location.pathname; // Keep the leading slash
+    if (currentPage === '/') {
         currentPage = 'index.html'; // Treat root URL as index.html
     }
 
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     navLinks.forEach(link => {
         let activeOnValues = link.activeOn.split(',');
-        const isActive = activeOnValues.includes(currentPage);
+        const isActive = activeOnValues.includes(currentPage.slice(1)) || activeOnValues.includes(currentPage); // Compare with and without the leading slash
         const linkHref = (isActive && link.link === 'index.html') ? '#' : link.link;
         const activeClass = isActive ? 'active' : '';
 
