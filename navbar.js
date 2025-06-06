@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    const currentPage = window.location.pathname.split('/').pop();
+    let currentPage = window.location.pathname.split('/').pop();
+    if (!currentPage) {
+        currentPage = 'index.html'; // Treat root URL as index.html
+    }
 
     const navLinks = [
         { text: 'Home', icon: 'fas fa-home', link: 'index.html', activeOn: 'index.html' },
