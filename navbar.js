@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const navLinks = [
         { text: 'Home', icon: 'fas fa-home', link: 'index.html', activeOn: 'index.html' },
-        { text: 'Apps', iconSrc: 'lt-ai.png', link: 'apps.html', activeOn: 'apps.html' },
-        { text: 'Updates', icon: 'fas fa-bell', link: 'updates.html', activeOn: 'updates.html' },
-        { text: 'Profile', icon: 'fas fa-user', link: 'profile.html', activeOn: 'profile.html' }
+        { text: 'Apps', iconSrc: 'lt-ai.png', link: 'apps.html', activeOn: 'apps.html,/apps' },
+        { text: 'Updates', icon: 'fas fa-bell', link: 'updates.html', activeOn: 'updates.html,/updates' },
+        { text: 'Profile', icon: 'fas fa-user', link: 'profile.html', activeOn: 'profile.html,/profile' }
 
     ];
 
@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
 
     navLinks.forEach(link => {
-        const isActive = link.activeOn === currentPage;
+        let activeOnValues = link.activeOn.split(',');
+        const isActive = activeOnValues.includes(currentPage);
         const linkHref = (isActive && link.link === 'index.html') ? '#' : link.link;
         const activeClass = isActive ? 'active' : '';
 
