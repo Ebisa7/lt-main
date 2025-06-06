@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - LT AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            overflow: auto; /* Show scrollbars only when content overflows */
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Make main take up the full viewport height */
+            text-align: center;
+            padding-bottom: 100px; /* Add padding to avoid navbar overlap */
+            box-sizing: border-box; /* Include padding in height calculation */
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px; /* Add margin below the content */
+        }
+        .error-heading {
+            font-size: 3rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #fff; /* Ensure text is white */
+        }
+        .tagline {
+            font-size: 1.2rem;
+            max-width: 90%;
+            margin-bottom: 2rem;
+        }
+        .cta-button {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Global Watermark Background -->
+    <div class="global-watermark"></div>
+
+    <!-- Star Canvas Background -->
+    <canvas id="stars" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-2;pointer-events:none;"></canvas>
+
+    <!-- Floating Icon "Stars" -->
+    <div id="icon-stars"></div>
+
+    <!-- Navbar Placeholder -->
+    <div class="navbar-placeholder"></div>
+
+    <!-- Mobile Navbar Placeholder -->
+    <div class="mobile-navbar-placeholder"></div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="error-heading">404 - Page Not Found</h1>
+                <p class="tagline">
+                    Oops! It seems like the page you are looking for doesn't exist.
+                </p>
+                <a href="index.html" class="cta-button">
+                    <i class="fas fa-home"></i> Go back to Home
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="star.js"></script>
+    <script src="navbar.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
